@@ -22,6 +22,10 @@ Make a speed boost. When the player presses 'A', their speed is increased for a 
 ## Brainstorming game ideas
 should add a sprite wall that kills user
 
+Could make user painfully slow, change background color to something more fun? - Seadrah
+
 ## Plan for implementing game
 Aaron shouldnt do anything cause he is awesome
+
+Adjust speed, adjust background colors - Seadrah
 
