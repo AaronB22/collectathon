@@ -80,7 +80,23 @@ int main()
         {
             currentSpeedMultiplier = 1;
         }
-
+        // Loop around border
+        if (player.x() >= MAX_X)
+        {
+            player.set_x(MIN_X + 1);
+        }
+        if (player.x() <= MIN_X)
+        {
+            player.set_x(MAX_X - 1);
+        }
+        if (player.y() >= MAX_Y)
+        {
+            player.set_y(MIN_Y + 1);
+        }
+        if (player.y() <= MIN_Y)
+        {
+            player.set_y(MAX_Y - 1);
+        }
         // Move player with d-pad
         if (bn::keypad::left_held())
         {
@@ -97,6 +113,18 @@ int main()
         if (bn::keypad::down_held())
         {
             player.set_y(player.y() + SPEED * currentSpeedMultiplier);
+        }
+
+        // Reset Button
+        if (bn::keypad::start_pressed())
+        {
+            player.set_x(xCord);
+            player.set_y(yCord);
+
+            treasure.set_x(0);
+            treasure.set_y(0);
+
+            score = 0;
         }
 
         // The bounding boxes of the player and treasure, snapped to integer pixels
