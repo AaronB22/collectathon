@@ -11,10 +11,15 @@ Game does stuff!
 
 ## Planning required changes
 Change the speed of the player - Seadrah
+
 Change the backdrop color - Jamison
+
 Change the starting position of the player and dot, making new static constexpr for starting X and Y of each - Aaron
+
 Make it so when the player hits start, the game restarts (the player and treasure are sent back to their initial positions and the score is reset to zero) - Seadrah
+
 Make it so that the player loops around the screen (if they go off the left of the screen, they show up on the right, if they go off the bottom of the screen they show up at the top, etc.) - Aaron
+
 Make a speed boost. When the player presses 'A', their speed is increased for a short amount of time. They can only use the speed boost 3 times. They get all speed boosts back when the game is restarted by pressing start. - Jamison
 
  Make it so when player hits start, game restarts -- can be implemented with an "if" check for the start button. I can also change the speed of the character. - Seadrah
