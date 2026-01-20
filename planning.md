@@ -17,6 +17,10 @@ background color should be different
 ## Brainstorming game ideas
 should add a sprite wall that kills user
 
+Could make user painfully slow, change background color to something more fun? - Seadrah
+
 ## Plan for implementing game
 Aaron shouldnt do anything cause he is awesome
+
+Adjust speed, adjust background colors - Seadrah
 
