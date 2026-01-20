@@ -14,7 +14,7 @@
 #include "common_fixed_8x16_font.h"
 
 // Pixels / Frame player moves at
-static constexpr bn::fixed SPEED = 1;
+static constexpr bn::fixed SPEED = 2;
 
 // Width and height of the the player and treasure bounding boxes
 static constexpr bn::size PLAYER_SIZE = {8, 8};
