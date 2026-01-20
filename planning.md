@@ -35,3 +35,10 @@ Aaron shouldnt do anything cause he is awesome
 
 Adjust speed, adjust background colors - Seadrah
 
+
+### Treasure Pieces run away
+* Get the Vector between the treasure and the player.
+* Find the unit of that vector -- magnitude of 1.
+* Invert the Vector.
+* Multiply the Vector by an ENEMY_SPEED variable.
+* Move the treasure to the new position indicated by the Vector.
