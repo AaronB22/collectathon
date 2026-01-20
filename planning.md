@@ -8,7 +8,8 @@ Game does stuff!
 
 
 ## Planning required changes
-background color should be different
+
+
 
 ## Brainstorming game ideas
 should add a sprite wall that kills user
