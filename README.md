@@ -1,3 +1,3 @@
 # collectathon!!
-Aaron is awesome!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111!!!!!11121!!!!!@!!!!!12
+Aaron is alright!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111!!!!!11121!!!!!@!!!!!12
 A template to explore GBA games and collaboration with git/GitHub. Please see the instructions in [instructions.md](./instructions.md).
