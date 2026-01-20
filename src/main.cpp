@@ -55,6 +55,18 @@ int main()
 
     while (true)
     {
+        if(player.x()>=MAX_X){
+            player.set_x(MIN_X+1);
+        }
+        if(player.x()<=MIN_X){
+            player.set_x(MAX_X-1);
+        }
+        if(player.y()>=MAX_Y){
+            player.set_y(MIN_Y+1);
+        }
+        if(player.y()<=MIN_Y){
+            player.set_y(MAX_Y-1);
+        }
         // Move player with d-pad
         if (bn::keypad::left_held())
         {
