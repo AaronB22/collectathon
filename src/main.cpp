@@ -87,11 +87,11 @@ int main()
 
         if (bn::keypad::start_pressed())
         {
-          player.set_x(-50);
-          player.set_y(50);
+          player.set_x(xCord);
+          player.set_y(yCord);
 
           treasure.set_x(0);
-          player.set_y(0);
+          treasure.set_y(0);
 
           score = 0;
         }
