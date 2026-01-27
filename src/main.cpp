@@ -53,6 +53,8 @@ int main()
     bn::sprite_ptr player = bn::sprite_items::square.create_sprite(xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
 
+    bn::sprite_ptr treasureMega = bn::sprite_items::megadot.create_sprite(0, 0);
+
     int boostDuration = 60;  // How long the boost will last in frames(?)
     int boostTime = 0;       // Decreases while boosting
     int boostCount = 3;      // How many boosts remain
