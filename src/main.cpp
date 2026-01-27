@@ -15,6 +15,7 @@
 #include "bn_sprite_items_square.h"
 #include "common_fixed_8x16_font.h"
 #include "bn_sprite_items_enemy.h"
+#include "bn_sprite_items_megadot.h"
 
 
 // Pixels / Frame player moves at
