@@ -26,6 +26,7 @@ static constexpr bn::fixed TREASURE_SPEED = 1;
 // Width and height of the the player and treasure bounding boxes
 static constexpr bn::size PLAYER_SIZE = {8, 8};
 static constexpr bn::size TREASURE_SIZE = {8, 8};
+static constexpr bn::size MEGA_TREASURE_SIZE = {16, 16};
 
 // Full bounds of the screen
 static constexpr int MIN_Y = -bn::display::height() / 2;
@@ -193,9 +194,14 @@ int main()
                                 score_sprites);
 
         // If score > 10, treasure sprite becomes mega - Seadrah
-        
+
         if (score == 10) {
             treasure = bn::sprite_items::megadot.create_sprite(0, 0);
+
+            treasure_rect = bn::rect(treasure.x().round_integer(),
+                                          treasure.y().round_integer(),
+                                          MEGA_TREASURE_SIZE.width(),
+                                          MEGA_TREASURE_SIZE.height());
         }
         // Update RNG seed every frame so we don't get the same sequence of positions every time
         rng.update();
