@@ -42,3 +42,5 @@ Adjust speed, adjust background colors - Seadrah
 * Invert the Vector.
 * Multiply the Vector by an ENEMY_SPEED variable.
 * Move the treasure to the new position indicated by the Vector.
+
+### Introduce obstacles
