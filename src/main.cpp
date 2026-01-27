@@ -192,8 +192,10 @@ int main()
                                 score_string,
                                 score_sprites);
 
+        // If score > 10, treasure sprite becomes mega - Seadrah
+        
         if (score == 10) {
-
+            treasure = bn::sprite_items::megadot.create_sprite(0, 0);
         }
         // Update RNG seed every frame so we don't get the same sequence of positions every time
         rng.update();
