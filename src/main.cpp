@@ -148,6 +148,13 @@ int main()
             score++;
         }
 
+        // Move treasure away from player
+        /*
+            Get player direction to treasure -> treasure(x,y)-player(x,y)
+            Multiply by treasure_speed
+            Move to new spot
+        */
+
         // Update score display
         bn::string<MAX_SCORE_CHARS> score_string = bn::to_string<MAX_SCORE_CHARS>(score);
         score_sprites.clear();
