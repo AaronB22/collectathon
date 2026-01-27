@@ -18,7 +18,6 @@
 #include "bn_sprite_items_enemy.h"
 #include "bn_sprite_items_megadot.h"
 
-
 // Pixels / Frame player moves at
 static constexpr bn::fixed SPEED = 2;
 static constexpr bn::fixed TREASURE_SPEED = 1;
@@ -57,8 +56,7 @@ int main()
 
     bn::sprite_ptr player = bn::sprite_items::square.create_sprite(xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
-    bn::sprite_ptr enemy = bn::sprite_items::enemy.create_sprite(10,100);
-
+    bn::sprite_ptr enemy = bn::sprite_items::enemy.create_sprite(10, 100);
 
     bn::sprite_ptr treasureMega = bn::sprite_items::megadot.create_sprite(0, 0);
 
@@ -168,24 +166,46 @@ int main()
         treasure.set_x(treasure.x() + dx);
         treasure.set_y(treasure.y() + dy);
 
-        // Loop treasure around border
-        if (treasure.x() >= MAX_X)
+        // Loop treasure around border ONLY when the player is close enough
+        if (bn::abs(treasure.x() - player.x()) < 15 || bn::abs(treasure.y() - player.y()) < 15)
         {
-            treasure.set_x(MIN_X + 1);
+            if (treasure.x() >= MAX_X)
+            {
+                treasure.set_x(MIN_X + 10);
+            }
+            if (treasure.x() <= MIN_X)
+            {
+                treasure.set_x(MAX_X - 10);
+            }
+            if (treasure.y() >= MAX_Y)
+            {
+                treasure.set_y(MIN_Y + 10);
+            }
+            if (treasure.y() <= MIN_Y)
+            {
+                treasure.set_y(MAX_Y - 10);
+            }
         }
-        if (treasure.x() <= MIN_X)
+        else
         {
-            treasure.set_x(MAX_X - 1);
+            // Otherwise just bonk.
+            if (treasure.x() >= MAX_X)
+            {
+                treasure.set_x(MAX_X);
+            }
+            if (treasure.x() <= MIN_X)
+            {
+                treasure.set_x(MIN_X);
+            }
+            if (treasure.y() >= MAX_Y)
+            {
+                treasure.set_y(MAX_Y);
+            }
+            if (treasure.y() <= MIN_Y)
+            {
+                treasure.set_y(MIN_Y);
+            }
         }
-        if (treasure.y() >= MAX_Y)
-        {
-            treasure.set_y(MIN_Y + 1);
-        }
-        if (treasure.y() <= MIN_Y)
-        {
-            treasure.set_y(MAX_Y - 1);
-        }
-
         // Update score display
         bn::string<MAX_SCORE_CHARS>
             score_string = bn::to_string<MAX_SCORE_CHARS>(score);
