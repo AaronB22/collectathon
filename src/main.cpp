@@ -221,6 +221,13 @@ int main()
         if (score == 10) {
             treasure = bn::sprite_items::megadot.create_sprite(0, 0);
         }
+
+        //enemie logic
+        if(player.x()==enemy.x() && player.y()==enemy.y()){
+            score=0;
+            player.set_x(10);
+            player.set_y(10);
+        }
         // Update RNG seed every frame so we don't get the same sequence of positions every time
         rng.update();
 
