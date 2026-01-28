@@ -27,6 +27,7 @@ static constexpr bn::fixed TREASURE_SPEED = 1;
 static constexpr bn::size PLAYER_SIZE = {8, 8};
 static constexpr bn::size TREASURE_SIZE = {8, 8};
 static constexpr bn::size MEGA_TREASURE_SIZE = {16, 16};
+static constexpr bn::size ENEMYBOX_SIZE={32,32};
 
 // Full bounds of the screen
 static constexpr int MIN_Y = -bn::display::height() / 2;
@@ -145,9 +146,13 @@ int main()
                                           treasure.y().round_integer(),
                                           TREASURE_SIZE.width(),
                                           TREASURE_SIZE.height());
+        bn::rect enemybox_rect = bn::rect(enemybox.x().round_integer(),
+                                          enemybox.y().round_integer(),
+                                          ENEMYBOX_SIZE.width(),
+                                          ENEMYBOX_SIZE.height());
 
-        // If the bounding boxes overlap, set the treasure to a new location an increase score
-        if (player_rect.intersects(treasure_rect))
+            // If the bounding boxes overlap, set the treasure to a new location an increase score
+            if (player_rect.intersects(treasure_rect))
         {
             // Jump to any random point in the screen
             int new_x = rng.get_int(MIN_X, MAX_X);
@@ -230,8 +235,8 @@ int main()
         }
 
         //enemie logic
-        if(player.x()==enemy.x() && player.y()==enemy.y()){
-            score=0;
+        if(player_rect.intersects(enemybox_rect)){
+            score--;
             player.set_x(10);
             player.set_y(10);
         }
