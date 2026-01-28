@@ -69,7 +69,8 @@ int main()
 
     int currentSpeedMultiplier = 1; // The Current multiplier for speed, gets changed to 2 when boosting.
 
-    int enemyDirection = 1; //Used to determine movement logic for enemybox
+    int enemyDirectionX = 1; //Used to determine movement logic for enemybox on x axis
+    int enemyDirectionY = 1; // Used to determine movement logic for enemybox on y axis
 
     while (true)
     {
@@ -241,28 +242,26 @@ int main()
         //sets ememy dircetions
 
         //moves on x axis when the score is a even number
-        if(score%2==0){
-            if(enemybox.x()>=MAX_X){
-                enemyDirection= -1;
-            }
-            if(enemybox.x()<=MIN_X){
-                enemyDirection= 1;
-            }
-            enemybox.set_x(enemybox.x() + ENEMYBOX_SPEED *enemyDirection);
-        }
-        //moves on y axis when the score is an odd number
-        if (score % 2 == 1)
+        if (enemybox.x() >= MAX_X)
         {
-            if (enemybox.y() >= MAX_Y)
-            {
-                enemyDirection = -1;
-            }
-            if (enemybox.y() <= MIN_Y)
-            {
-                enemyDirection = 1;
-            }
-            enemybox.set_y(enemybox.y() + ENEMYBOX_SPEED*enemyDirection);
+            enemyDirectionX = -1;
         }
+        if (enemybox.x() <= MIN_X)
+        {
+            enemyDirectionX = 1;
+        }
+        if (enemybox.y() >= MAX_Y)
+        {
+            enemyDirectionY = -1;
+        }
+        if (enemybox.y() <= MIN_Y)
+        {
+            enemyDirectionY = 1;
+        }
+        enemybox.set_x(enemybox.x() + ENEMYBOX_SPEED * enemyDirectionX);
+        enemybox.set_y(enemybox.y() + ENEMYBOX_SPEED * enemyDirectionY);
+        
+
         //detects if player and enemy hit
         if(player_rect.intersects(enemybox_rect)){
             if( score>0){
