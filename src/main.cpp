@@ -59,9 +59,8 @@ int main()
 
     bn::sprite_ptr player = bn::sprite_items::square.create_sprite(xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
-    bn::sprite_ptr enemy = bn::sprite_items::enemy.create_sprite(0,0);
-    bn::sprite_ptr enemybox= bn::sprite_items::enemydot.create_sprite(0,0);
-
+    bn::sprite_ptr enemy = bn::sprite_items::enemy.create_sprite(0, 0);
+    bn::sprite_ptr enemybox = bn::sprite_items::enemydot.create_sprite(0, 0);
 
     int boostDuration = 60;  // How long the boost will last in frames(?)
     int boostTime = 0;       // Decreases while boosting
@@ -71,7 +70,7 @@ int main()
     int currentSpeedMultiplier = 1; // The Current multiplier for speed, gets changed to 2 when boosting.
     while (true)
     {
-        
+
         // Speed boost
         if (bn::keypad::a_pressed() && boostCount > 0)
         {
