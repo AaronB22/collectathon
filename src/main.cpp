@@ -263,7 +263,9 @@ int main()
         }
 
         if(player_rect.intersects(enemybox_rect)){
-            score--;
+            if( score>0){
+                score--;
+            }
             player.set_x(10);
             player.set_y(10);
             int new_x = rng.get_int(MIN_X, MAX_X);
