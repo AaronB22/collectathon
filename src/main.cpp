@@ -60,7 +60,6 @@ int main()
 
     bn::sprite_ptr player = bn::sprite_items::square.create_sprite(xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
-    bn::sprite_ptr enemy = bn::sprite_items::enemy.create_sprite(0, 0);
     bn::sprite_ptr enemybox = bn::sprite_items::enemydot.create_sprite(0, 0);
 
     int boostDuration = 60;  // How long the boost will last in frames(?)
@@ -70,7 +69,7 @@ int main()
 
     int currentSpeedMultiplier = 1; // The Current multiplier for speed, gets changed to 2 when boosting.
 
-    int enemyDirection = 1;
+    int enemyDirection = 1; //Used to determine movement logic for enemybox
 
     while (true)
     {
@@ -240,6 +239,8 @@ int main()
         //enemy logic
 
         //sets ememy dircetions
+
+        //moves on x axis when the score is a even number
         if(score%2==0){
             if(enemybox.x()>=MAX_X){
                 enemyDirection= -1;
@@ -249,6 +250,7 @@ int main()
             }
             enemybox.set_x(enemybox.x() + ENEMYBOX_SPEED *enemyDirection);
         }
+        //moves on y axis when the score is an odd number
         if (score % 2 == 1)
         {
             if (enemybox.y() >= MAX_Y)
@@ -261,7 +263,7 @@ int main()
             }
             enemybox.set_y(enemybox.y() + ENEMYBOX_SPEED*enemyDirection);
         }
-
+        //detects if player and enemy hit
         if(player_rect.intersects(enemybox_rect)){
             if( score>0){
                 score--;
