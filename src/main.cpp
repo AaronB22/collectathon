@@ -22,7 +22,6 @@
 // Pixels / Frame player moves at
 static constexpr bn::fixed SPEED = 2;
 static constexpr bn::fixed TREASURE_SPEED = 1;
-static constexpr bn::fixed ENEMYBOX_SPEED = .5;
 
 // Width and height of the the player and treasure bounding boxes
 static constexpr bn::size PLAYER_SIZE = {8, 8};
@@ -71,6 +70,8 @@ int main()
 
     int enemyDirectionX = 1; //Used to determine movement logic for enemybox on x axis
     int enemyDirectionY = 1; // Used to determine movement logic for enemybox on y axis
+    int enemySpeedX=1;
+    int enemySpeedY=1;
 
     while (true)
     {
@@ -245,21 +246,26 @@ int main()
         if (enemybox.x() >= MAX_X)
         {
             enemyDirectionX = -1;
+            enemySpeedX = rng.get_int(1, 2);
         }
         if (enemybox.x() <= MIN_X)
         {
             enemyDirectionX = 1;
+            enemySpeedX = rng.get_int(1, 2);
         }
         if (enemybox.y() >= MAX_Y)
         {
             enemyDirectionY = -1;
+            enemySpeedY = rng.get_int(1, 2);
         }
         if (enemybox.y() <= MIN_Y)
         {
             enemyDirectionY = 1;
+            enemySpeedY = rng.get_int(1, 2);
         }
-        enemybox.set_x(enemybox.x() + ENEMYBOX_SPEED * enemyDirectionX);
-        enemybox.set_y(enemybox.y() + ENEMYBOX_SPEED * enemyDirectionY);
+
+        enemybox.set_x(enemybox.x() + enemySpeedX * enemyDirectionX);
+        enemybox.set_y(enemybox.y() + enemySpeedY * enemyDirectionY);
         
 
         //detects if player and enemy hit
