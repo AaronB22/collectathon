@@ -42,6 +42,45 @@ static constexpr int MAX_SCORE_CHARS = 11;
 static constexpr int SCORE_X = 70;
 static constexpr int SCORE_Y = -70;
 
+int boostDuration = 60;  // How long the boost will last in frames(?)
+int boostTime = 0;       // Decreases while boosting
+int boostCount = 3;      // How many boosts remain
+int boostMultiplier = 2; // How much faster the sphere moves
+
+int currentSpeedMultiplier = 1; // The Current multiplier for speed, gets changed to 2 when boosting.
+
+// The CURRENT width and height of the treasure ( this could be done better )
+int treasureSizeX = TREASURE_SIZE.width();
+int treasureSizeY = TREASURE_SIZE.height();
+int treasureScareMultiplier = 3; // This multiplied with the treasure's size is the distance it will run from the player at.
+
+int enemyDirectionX = 1; // Used to determine movement logic for enemybox on x axis
+int enemyDirectionY = 1; // Used to determine movement logic for enemybox on y axis
+int enemySpeedX = 1;
+int enemySpeedY = 1;
+
+void SpeedBoost()
+{
+    // Speed boost
+    if (bn::keypad::a_pressed() && boostCount > 0)
+    {
+        if (boostCount > 0)
+        {
+            boostCount--;
+            boostTime = boostDuration;
+            currentSpeedMultiplier = boostMultiplier;
+        }
+    }
+    if (boostTime > 0)
+    {
+        boostTime--;
+    }
+    else
+    {
+        currentSpeedMultiplier = 1;
+    }
+}
+
 int main()
 {
     bn::core::init();
@@ -61,44 +100,9 @@ int main()
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
     bn::sprite_ptr enemybox = bn::sprite_items::enemydot.create_sprite(0, 0);
 
-    int boostDuration = 60;  // How long the boost will last in frames(?)
-    int boostTime = 0;       // Decreases while boosting
-    int boostCount = 3;      // How many boosts remain
-    int boostMultiplier = 2; // How much faster the sphere moves
-
-    int currentSpeedMultiplier = 1; // The Current multiplier for speed, gets changed to 2 when boosting.
-
-    // The CURRENT width and height of the treasure ( this could be done better )
-    int treasureSizeX = TREASURE_SIZE.width();
-    int treasureSizeY = TREASURE_SIZE.height();
-    int treasureScareMultiplier = 3; // This multiplied with the treasure's size is the distance it will run from the player at.
-
-    int enemyDirectionX = 1; // Used to determine movement logic for enemybox on x axis
-    int enemyDirectionY = 1; // Used to determine movement logic for enemybox on y axis
-    int enemySpeedX = 1;
-    int enemySpeedY = 1;
-
     while (true)
     {
-
-        // Speed boost
-        if (bn::keypad::a_pressed() && boostCount > 0)
-        {
-            if (boostCount > 0)
-            {
-                boostCount--;
-                boostTime = boostDuration;
-                currentSpeedMultiplier = boostMultiplier;
-            }
-        }
-        if (boostTime > 0)
-        {
-            boostTime--;
-        }
-        else
-        {
-            currentSpeedMultiplier = 1;
-        }
+        SpeedBoost();
         // Loop around border
         if (player.x() >= MAX_X)
         {
