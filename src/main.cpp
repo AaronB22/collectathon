@@ -169,6 +169,19 @@ int main()
             treasure.set_position(new_x, new_y);
 
             score++;
+
+            // If score > 10, treasure sprite becomes mega - Seadrah
+            if (score == 10)
+            {
+                treasure = bn::sprite_items::megadot.create_sprite(0, 0);
+
+                treasure_rect = bn::rect(treasure.x().round_integer(),
+                                         treasure.y().round_integer(),
+                                         MEGA_TREASURE_SIZE.width(),
+                                         MEGA_TREASURE_SIZE.height());
+                treasureSizeX = MEGA_TREASURE_SIZE.width();
+                treasureSizeY = MEGA_TREASURE_SIZE.height();
+            }
         }
 
         // Move treasure away from player
@@ -230,20 +243,6 @@ int main()
         text_generator.generate(SCORE_X, SCORE_Y,
                                 score_string,
                                 score_sprites);
-
-        // If score > 10, treasure sprite becomes mega - Seadrah
-
-        if (score == 10)
-        {
-            treasure = bn::sprite_items::megadot.create_sprite(0, 0);
-
-            treasure_rect = bn::rect(treasure.x().round_integer(),
-                                     treasure.y().round_integer(),
-                                     MEGA_TREASURE_SIZE.width(),
-                                     MEGA_TREASURE_SIZE.height());
-            treasureSizeX = MEGA_TREASURE_SIZE.width();
-            treasureSizeY = MEGA_TREASURE_SIZE.height();
-        }
 
         // enemy logic
 
