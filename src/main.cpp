@@ -212,7 +212,6 @@ void TreasureMovement(bn::sprite_ptr treasure, bn::sprite_ptr player)
 
 void EnemyMovement(bn::sprite_ptr enemybox, bn::random rng)
 {
-    // moves on x axis when the score is a even number
     if (enemybox.x() >= MAX_X)
     {
         enemyDirectionX = -1;
@@ -325,7 +324,10 @@ int main()
         EnemyMovement(enemybox, rng);
         // Detects if player and enemy hit
         if (player_rect.intersects(enemybox_rect))
+        {
             OnPlayerTouchEnemy(player);
+            ResetEnemy(enemybox, rng);
+        }
 
         // Update RNG seed every frame so we don't get the same sequence of positions every time
         rng.update();
