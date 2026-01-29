@@ -153,8 +153,8 @@ int main()
                                         PLAYER_SIZE.height());
         bn::rect treasure_rect = bn::rect(treasure.x().round_integer(),
                                           treasure.y().round_integer(),
-                                          TREASURE_SIZE.width(),
-                                          TREASURE_SIZE.height());
+                                          treasureSizeX,
+                                          treasureSizeY);
         bn::rect enemybox_rect = bn::rect(enemybox.x().round_integer(),
                                           enemybox.y().round_integer(),
                                           ENEMYBOX_SIZE.width(),
@@ -175,6 +175,7 @@ int main()
             {
                 treasure = bn::sprite_items::megadot.create_sprite(0, 0);
 
+                // This rect only exists for the frame it was created
                 treasure_rect = bn::rect(treasure.x().round_integer(),
                                          treasure.y().round_integer(),
                                          MEGA_TREASURE_SIZE.width(),
