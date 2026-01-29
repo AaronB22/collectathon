@@ -47,6 +47,7 @@ static constexpr int SCORE_Y = -70;
 
 int boostDuration = 60;  // How long the boost will last in frames(?)
 int boostTime = 0;       // Decreases while boosting
+int boostDefault = 3;    // How many boosts you can hold
 int boostCount = 3;      // How many boosts remain
 int boostMultiplier = 2; // How much faster the sphere moves
 
@@ -140,6 +141,9 @@ void ResetButton(bn::sprite_ptr player, bn::sprite_ptr treasure)
 
         treasure.set_x(0);
         treasure.set_y(0);
+
+        // Reset boost
+        boostCount = boostDefault;
 
         score = 0;
     }
@@ -292,7 +296,7 @@ int main()
                                           ENEMYBOX_SIZE.width(),
                                           ENEMYBOX_SIZE.height());
 
-        // If the bounding boxes overlap, set the treasure to a new location an increase score
+        // If the bounding boxes overlap, set the treasure to a new location and increase score
         if (player_rect.intersects(treasure_rect))
         {
             OnPlayerTouchTreasure(treasure, rng);
