@@ -18,7 +18,6 @@
 #include "bn_sprite_items_enemy.h"
 #include "bn_sprite_items_megadot.h"
 #include "bn_sprite_items_enemydot.h"
-#include "bn_sprite_items_smallenemy.h"
 
 // Pixels / Frame player moves at
 static constexpr bn::fixed SPEED = 2;
