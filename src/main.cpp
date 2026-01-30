@@ -164,6 +164,10 @@ void OnPlayerTouchTreasure(bn::sprite_ptr treasure, bn::random rng)
     treasure.set_position(new_x, new_y);
 
     score++;
+    if (score > highScore)
+    {
+        highScore = score;
+    }
 }
 
 void TreasureMovement(bn::sprite_ptr treasure, bn::sprite_ptr player)
@@ -273,9 +277,10 @@ int main()
     bn::backdrop::set_color(bn::color(21, 15, 15));
     bn::random rng = bn::random();
 
-    // Start Text Vector
+    // Start text Sprites Vector
     bn::vector<bn::sprite_ptr, 11> start_sprites = {};
     // Will hold the sprites for the score
+    bn::vector<bn::sprite_ptr, MAX_SCORE_CHARS> high_score_sprites = {};
     bn::vector<bn::sprite_ptr, MAX_SCORE_CHARS> score_sprites = {};
     bn::sprite_text_generator text_generator(common::fixed_8x16_sprite_font);
 
@@ -350,12 +355,19 @@ int main()
         else
         {
             start_sprites.clear();
+            high_score_sprites.clear();
             text_generator.generate(0, 0,
                                     "Press Start",
                                     start_sprites);
+            bn::string<MAX_SCORE_CHARS>
+                high_score_string = bn::to_string<MAX_SCORE_CHARS>(highScore);
+            text_generator.generate(0, 15,
+                                    high_score_string,
+                                    high_score_sprites);
             if (bn::keypad::start_pressed())
             {
                 start_sprites.clear();
+                high_score_sprites.clear();
                 gameActive = true;
             }
         }
