@@ -305,15 +305,61 @@ void ResetEnemy(bn::sprite_ptr enemybox, bn::random rng)
 }
 void checkIfBoostisFull(bn::sprite_ptr bolt, bn::random rng)
 {
-    if(boostCount==3){
+    if (boostCount == 3)
+    {
         bolt.set_x(100);
         bolt.set_y(100);
+        return;
     }
-    if(bolt.x()==100){
+    if (bolt.x() == 100)
+    {
         int new_x = rng.get_int(MIN_X, MAX_X);
         int new_y = rng.get_int(MIN_Y, MAX_Y);
         bolt.set_x(new_x);
         bolt.set_y(new_y);
+    }
+}
+void speedBoostVisual(bn::sprite_ptr player, bn::vector<bn::sprite_ptr, 3> minibolts)
+{
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (boostCount == 3)
+        {
+            minibolts[i].set_x(player.x() - 10 + (i * 10));
+            minibolts[i].set_y(player.y() + 15);
+        }
+        if (boostCount == 2)
+        {
+            if (i < 2)
+            {
+                minibolts[i].set_x(player.x() - 10 + (i * 10));
+                minibolts[i].set_y(player.y() + 15);
+            }
+            else
+            {
+                minibolts[i].set_x(100);
+                minibolts[i].set_y(100);
+            }
+        }
+        if (boostCount == 1)
+        {
+            if (i < 1)
+            {
+                minibolts[i].set_x(player.x() - 10 + (i * 10));
+                minibolts[i].set_y(player.y() + 15);
+            
+            }
+            else{
+                minibolts[i].set_x(100);
+                minibolts[i].set_y(100);
+            }
+        }
+        if (boostCount == 0)
+        {
+            minibolts[i].set_x(100);
+            minibolts[i].set_y(100);
+        }
     }
 }
 int main()
@@ -334,6 +380,16 @@ int main()
     bn::sprite_ptr enemybox = bn::sprite_items::enemydot.create_sprite(-xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
     bn::sprite_ptr boltboost = bn::sprite_items::bolt.create_sprite(20, 40);
+    // bn::sprite_ptr minibolt1 = bn::sprite_items::bolt.create_sprite(100, 100);
+    // bn::sprite_ptr minibolt2 = bn::sprite_items::bolt.create_sprite(100, 100);
+    // bn::sprite_ptr minibolt3 = bn::sprite_items::bolt.create_sprite(100, 100);
+    bn::vector<bn::sprite_ptr, 3> mini_bolts = {};
+    for (int i = 0; i < 3; i++)
+    {
+        bn::sprite_ptr litteBolt = bn::sprite_items::bolt.create_sprite(xCord - 10 + (i * 10), yCord + 15);
+        litteBolt.set_scale(.50);
+        mini_bolts.push_back(litteBolt);
+    }
 
     while (true)
     {
@@ -405,15 +461,17 @@ int main()
                 ResetEnemy(enemybox, rng);
             }
 
-            if(boostCount==3){
+            if (boostCount == 3)
+            {
                 boltboost.set_x(100);
                 boltboost.set_y(100);
             }
-            if(boostCount!=3){
-                
+            if (boostCount != 3)
+            {
             }
             // if player interacts with speed boost
-            checkIfBoostisFull(boltboost,rng);
+            checkIfBoostisFull(boltboost, rng);
+            speedBoostVisual(player, mini_bolts);
             if (player_rect.intersects(bolt_rect))
             {
                 SpeedBoostAdder(rng, boltboost);
