@@ -15,11 +15,10 @@
 
 #include "bn_sprite_items_dot.h"
 #include "bn_sprite_items_piggy.h"
-#include "bn_sprite_items_square.h"
 #include "common_fixed_8x16_font.h"
 #include "bn_sprite_items_enemy.h"
 #include "bn_sprite_items_megadot.h"
-#include "bn_sprite_items_enemydot.h"
+#include "bn_sprite_items_enemyhammer.h"
 
 // Sound effect items
 #include "bn_sound_items.h"
@@ -305,7 +304,7 @@ int main()
     bn::sprite_text_generator text_generator(common::fixed_8x16_sprite_font);
 
     bn::sprite_ptr player = bn::sprite_items::piggy.create_sprite(xCord, yCord);
-    bn::sprite_ptr enemybox = bn::sprite_items::enemydot.create_sprite(-xCord, yCord);
+    bn::sprite_ptr enemybox = bn::sprite_items::enemyhammer.create_sprite(-xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
 
 
