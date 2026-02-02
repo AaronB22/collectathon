@@ -19,10 +19,10 @@
 #include "bn_sprite_items_enemy.h"
 #include "bn_sprite_items_megadot.h"
 #include "bn_sprite_items_enemyhammer.h"
+#include "bn_sprite_items_bolt.h"
 
 // Sound effect items
 #include "bn_sound_items.h"
-
 
 
 // Pixels / Frame player moves at
@@ -96,6 +96,9 @@ void SpeedBoost()
     {
         currentSpeedMultiplier = 1;
     }
+}
+void SpeedBoostAdder(){
+
 }
 
 void PlayerBorderLoop(bn::sprite_ptr player)
@@ -306,6 +309,7 @@ int main()
     bn::sprite_ptr player = bn::sprite_items::piggy.create_sprite(xCord, yCord);
     bn::sprite_ptr enemybox = bn::sprite_items::enemyhammer.create_sprite(-xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
+    bn::sprite_ptr speedBoost= bn::sprite_items::bolt.create_sprite(10,10);
 
 
     while (true)
