@@ -25,7 +25,6 @@
 // Sound effect items
 #include "bn_sound_items.h"
 
-
 // Pixels / Frame player moves at
 static constexpr bn::fixed SPEED = 2;
 static constexpr bn::fixed TREASURE_SPEED = 1;
@@ -98,8 +97,20 @@ void SpeedBoost()
         currentSpeedMultiplier = 1;
     }
 }
-void SpeedBoostAdder(){
-
+void SpeedBoostAdder(bn::random rng, bn::sprite_ptr bolt)
+{
+    // if speed boost is maxed out, returns
+    if (boostCount == 3)
+    {
+        return;
+    }
+    else
+    {
+        boostCount++;
+    }
+    int new_x = rng.get_int(MIN_X, MAX_X);
+    int new_y = rng.get_int(MIN_Y, MAX_Y);
+    bolt.set_position(new_x, new_y);
 }
 
 void PlayerBorderLoop(bn::sprite_ptr player)
@@ -292,7 +303,19 @@ void ResetEnemy(bn::sprite_ptr enemybox, bn::random rng)
     enemybox.set_x(new_x);
     enemybox.set_y(new_y);
 }
-
+void checkIfBoostisFull(bn::sprite_ptr bolt, bn::random rng)
+{
+    if(boostCount==3){
+        bolt.set_x(100);
+        bolt.set_y(100);
+    }
+    if(bolt.x()==100){
+        int new_x = rng.get_int(MIN_X, MAX_X);
+        int new_y = rng.get_int(MIN_Y, MAX_Y);
+        bolt.set_x(new_x);
+        bolt.set_y(new_y);
+    }
+}
 int main()
 {
     bn::core::init();
@@ -310,14 +333,13 @@ int main()
     bn::sprite_ptr player = bn::sprite_items::piggy.create_sprite(xCord, yCord);
     bn::sprite_ptr enemybox = bn::sprite_items::enemydot.create_sprite(-xCord, yCord);
     bn::sprite_ptr treasure = bn::sprite_items::dot.create_sprite(0, 0);
-    bn::sprite_ptr speedBoost= bn::sprite_items::bolt.create_sprite(10,10);
-
+    bn::sprite_ptr boltboost = bn::sprite_items::bolt.create_sprite(20, 40);
 
     while (true)
     {
         if (gameActive)
         {
-            
+
             SpeedBoost();
             PlayerBorderLoop(player);
             PlayerMovement(player);
@@ -336,6 +358,10 @@ int main()
                                               enemybox.y().round_integer(),
                                               ENEMYBOX_SIZE.width(),
                                               ENEMYBOX_SIZE.height());
+            bn::rect bolt_rect = bn::rect(boltboost.x().round_integer(),
+                                          boltboost.y().round_integer(),
+                                          16,
+                                          16);
 
             // If the bounding boxes overlap, set the treasure to a new location and increase score
             if (player_rect.intersects(treasure_rect))
@@ -379,6 +405,20 @@ int main()
                 ResetEnemy(enemybox, rng);
             }
 
+            if(boostCount==3){
+                boltboost.set_x(100);
+                boltboost.set_y(100);
+            }
+            if(boostCount!=3){
+                
+            }
+            // if player interacts with speed boost
+            checkIfBoostisFull(boltboost,rng);
+            if (player_rect.intersects(bolt_rect))
+            {
+                SpeedBoostAdder(rng, boltboost);
+            }
+
             // Update RNG seed every frame so we don't get the same sequence of positions every time
             rng.update();
         }
@@ -397,7 +437,7 @@ int main()
             if (bn::keypad::start_pressed())
             {
                 // Play sound effect
-                    bn::sound_items::blip_select.play();
+                bn::sound_items::blip_select.play();
                 start_sprites.clear();
                 high_score_sprites.clear();
                 gameActive = true;
