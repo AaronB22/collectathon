@@ -1,4 +1,3 @@
-# collectathon!!
-Aaron is awesome. Like super awesome. Aaron is number one!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111!!!!!11121!!!!!@!!!!!12  <----- Invalid statement 
-Most awesome GBA team!!
-A template to explore GBA games and collaboration with git/GitHub. Please see the instructions in [instructions.md](./instructions.md).
+# Coin Chase
+In this game, you are a piggy bank chasing a coin. Your goal is to get as many coins as possible. 
+If you hit the hammer, you lose a coin. Press z to use your speed boos. Hit enter to restart and see your last score.
