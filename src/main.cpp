@@ -314,8 +314,8 @@ void checkIfBoostisFull(bn::sprite_ptr bolt, bn::random rng)
     {
         int new_x = rng.get_int(MIN_X, MAX_X);
         int new_y = rng.get_int(MIN_Y, MAX_Y);
-        bolt.set_x(new_x);
-        bolt.set_y(new_y);
+        bolt.set_x(new_x*.9);
+        bolt.set_y(new_y*.9);
     }
 }
 void speedBoostVisual(bn::sprite_ptr player, bn::vector<bn::sprite_ptr, 3> minibolts)
