@@ -347,9 +347,9 @@ void speedBoostVisual(bn::sprite_ptr player, bn::vector<bn::sprite_ptr, 3> minib
             {
                 minibolts[i].set_x(player.x() - 10 + (i * 10));
                 minibolts[i].set_y(player.y() + 15);
-            
             }
-            else{
+            else
+            {
                 minibolts[i].set_x(100);
                 minibolts[i].set_y(100);
             }
@@ -361,6 +361,23 @@ void speedBoostVisual(bn::sprite_ptr player, bn::vector<bn::sprite_ptr, 3> minib
         }
     }
 }
+
+int theta = 0;
+int spinSpeed = 8;
+void spinHammer(bn::sprite_ptr hammer)
+{
+    theta += spinSpeed * enemyDirectionX * enemyDirectionY;
+    if (theta > 360)
+    {
+        theta -= 360;
+    }
+    else if (theta < 0)
+    {
+        theta += 360;
+    }
+    hammer.set_rotation_angle(theta);
+}
+
 int main()
 {
     bn::core::init();
@@ -399,6 +416,8 @@ int main()
             PlayerBorderLoop(player);
             PlayerMovement(player);
             ResetButton(player, treasure, enemybox);
+
+            spinHammer(enemybox);
 
             // The bounding boxes of the player and treasure, snapped to integer pixels
             bn::rect player_rect = bn::rect(player.x().round_integer(),
